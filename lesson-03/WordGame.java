@@ -43,21 +43,18 @@ public class WordGame {
         while (true) { // игра продолжается до тех пор, пока не будет угадано слово
             // System.out.println(myWord); // отладка
             String userWord = in.nextLine();
-            if (userWord.equals(myWord)) // если слово угадано, значит победа
-                return true;
-            int matches = getNumOfMatch(myWord, userWord);
-            if (matches == 0)
-                System.out.println("no matches in your word!");
-            else
-                System.out.println(myWord.substring(0, matches) + "################" + " (" + matches + " matches in word!)");
+            if (userWord.equals(myWord)) return true; // если слово угадано, значит победа
+            else System.out.println(getMatchWord(myWord, userWord));
         }
     }
 
-    private static int getNumOfMatch(String basicWord, String inputWord) {
-        int matches = 0;
+    private static String getMatchWord(String basicWord, String inputWord) {
+        String word = "";
         for (int i = 0; i < basicWord.length() && i < inputWord.length(); i++)
-            if ((int) basicWord.charAt(i) == (int) inputWord.charAt(i))
-                matches++;
-        return matches;
+            if ((int)basicWord.charAt(i) == (int)inputWord.charAt(i))
+                word += basicWord.charAt(i);
+            else
+                word += "#";
+        return word + "############";
     }
 }
