@@ -14,5 +14,12 @@ public class Employee {
         this.salary = salary;
         this.email = email;
         this.phone = phone;
-    }	
+    }
+
+    public String getName() { return this.name; }
+    public String getWorkpost() { return this.workpost; }
+    public String getEmail() { return this.email; }
+    public int getAge() { return this.age; }
+    public int getSalary() { return this.salary; }
+    public String getPhone() { return "+7" + Long.toString(this.phone); }	
 }
