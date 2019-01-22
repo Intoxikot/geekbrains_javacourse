@@ -21,5 +21,19 @@ public class Employee {
     public String getEmail() { return this.email; }
     public int getAge() { return this.age; }
     public int getSalary() { return this.salary; }
-    public String getPhone() { return "+7" + Long.toString(this.phone); }	
+    public String getPhone() { return "+7" + Long.toString(this.phone); }
+
+    public void showInfo() {
+        System.out.println(this.toString());
+    }
+
+    @Override
+    public String toString() {
+        StringBuffer buf = new StringBuffer();
+        buf.append("\t" + "Employee info:" + "\n");
+        buf.append("employee: " + getName() + ", " + getAge() + " years" + "\n");
+        buf.append("workpost: " + getWorkpost() + ", " + getSalary() + "$" + "\n");
+        buf.append("contacts: " + getPhone() + ", " + getEmail() + "\n");
+        return buf.toString();
+    }	
 }
