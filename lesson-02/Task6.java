@@ -38,10 +38,13 @@ public class Task6 {
 
     // Ищет "середину" в массиве и возвращает true, если она найдена
     public static boolean checkBalance(int[] a) {
-        for (int i = 1; i < a.length; i++) {
-            int[] left = Arrays.copyOfRange(a, 0, i);
-            int[] right = Arrays.copyOfRange(a, i, a.length);
-            if (sum(left) == sum(right))
+        int leftSum = 0;
+        int rightSum = sum(a);
+        for (int i = 0; i < a.length; i++) {
+            leftSum += a[i];
+            rightSum -= a[i];
+            // System.out.println(leftSum + " | " + rightSum); // Отладка
+            if (leftSum == rightSum)
                 return true;
         }
         return false;
