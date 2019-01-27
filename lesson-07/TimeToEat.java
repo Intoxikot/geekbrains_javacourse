@@ -15,7 +15,7 @@
 class Plate {
     private int food;
     public Plate(int food) { this.food = food; }
-    public void decreaseFood(int n) { food -= n; }
+    public void decreaseFood(int n) { food -= (n <= food) ? n: food; } // мы не можем съесть еды больше, чем есть в наличии
     public void info() { System.out.println("plate: " + food); }
 }
 
@@ -36,9 +36,9 @@ class Cat {
 public class Main {
     public static void main(String[] args) {
         Cat cat = new Cat("Barsik", 5);
-        Plate plate = new Plate(100);
+        Plate plate = new Plate(3);
         plate.info();
-        cat.eat(plate);
+        cat.eat(plate); // еда съедается вся, а кот не наелся :c
         plate.info();
     }
 }
