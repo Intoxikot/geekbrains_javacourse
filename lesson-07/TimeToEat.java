@@ -15,30 +15,46 @@
 class Plate {
     private int food;
     public Plate(int food) { this.food = food; }
-    public void decreaseFood(int n) { food -= (n <= food) ? n: food; } // мы не можем съесть еды больше, чем есть в наличии
+    public void decreaseFood(int requested) { food -= (requested <= food) ? requested: food; } // мы не можем съесть еды больше, чем есть в наличии
+    public int getFood() { return food; }
     public void info() { System.out.println("plate: " + food); }
 }
 
 class Cat {
     private String name;
     private int appetite;
+    private boolean fed;
 
     public Cat(String name, int appetite) {
         this.name = name;
         this.appetite = appetite;
+        this.fed = false;
     }
 
-    public void eat(Plate p) {
-        p.decreaseFood(appetite);
+    public boolean eat(Plate p) {
+        if (fed)
+            return false; // кот не будет есть, если он уже сыт
+        else if (this.appetite <= p.getFood()) {
+            p.decreaseFood(appetite);
+            fed = true;
+            return fed;
+        }
+        else
+            return false; // если коту не хватает еды, он расстраивается и ничего не ест
     }
 }
 
 public class Main {
     public static void main(String[] args) {
-        Cat cat = new Cat("Barsik", 5);
-        Plate plate = new Plate(3);
+        Cat barsik = new Cat("Barsik", 5);
+        Plate plate = new Plate(10);
         plate.info();
-        cat.eat(plate); // еда съедается вся, а кот не наелся :c
+        barsik.eat(plate);
+        plate.info();
+        barsik.eat(plate); // пробуем кормить кота дважды
+        plate.info();
+        Cat mursik = new Cat("Mursik", 15); // крайне прожорливый кот
+        mursik.eat(plate);
         plate.info();
     }
 }
