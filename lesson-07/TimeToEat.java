@@ -36,25 +36,35 @@ class Cat {
         if (fed)
             return false; // кот не будет есть, если он уже сыт
         else if (this.appetite <= p.getFood()) {
+            System.out.println("cat " + name + " has eaten " + appetite + " unit(s) of food");
             p.decreaseFood(appetite);
             fed = true;
             return fed;
         }
-        else
+        else {
+            System.out.println("cat " + name + " left hungry");
             return false; // если коту не хватает еды, он расстраивается и ничего не ест
+        }
     }
+
+    public boolean isFed() { return this.fed; } // проверяем сытость
 }
 
 public class Main {
     public static void main(String[] args) {
+        Cat[] catalog = getCats(); // набор котов - это коталог :D
+        Plate plate = new Plate(30); // создаем самую большую миску
+        for (Cat cat : catalog) {
+            plate.info();
+            cat.eat(plate);
+        }
+    }
+
+    public static Cat[] getCats() {
         Cat barsik = new Cat("Barsik", 5);
-        Plate plate = new Plate(10);
-        plate.info();
-        barsik.eat(plate);
-        plate.addFood(30); // добавляем еду
-        plate.info();
-        Cat mursik = new Cat("Mursik", 15); // крайне прожорливый кот
-        mursik.eat(plate);
-        plate.info();
+        Cat mursik = new Cat("Mursik", 15);
+        Cat puhok = new Cat("Puhok", 8);
+        Cat chernush = new Cat("Chernush", 10);
+        return new Cat[]{barsik, mursik, puhok, chernush};
     }
 }
